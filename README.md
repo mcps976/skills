@@ -8,8 +8,9 @@ Each skill lives in its own subdirectory with a `SKILL.md` containing YAML front
 
 ```
 skills/
-├── bitcoin-node/        # Bitcoin Core, Electrs, Alby Hub, Sparrow, mining
-└── homelab-context/     # Network topology, TrueNAS services, Docker, OPNsense, SSH
+├── bitcoin-node/          # Bitcoin Core, Electrs, Alby Hub, Sparrow, mining
+├── homelab-context/       # Network topology, TrueNAS services, Docker, OPNsense, SSH
+└── research-methodology/  # 6-lens analytical framework (references ~/Git/research-skill-graph/)
 ```
 
 All skills use `user-invocable: false` — Claude loads them automatically when relevant, no slash command needed.
