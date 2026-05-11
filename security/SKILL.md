@@ -5,7 +5,7 @@ description: Security check before pushing or deploying. Scans for exposed secre
 # /security
 
 1. Run `git diff HEAD` and scan all changed files for:
-   - API keys and tokens: Anthropic API keys, AWS access keys, GitHub tokens (ghp_…/gho_…), Cloudflare tokens (CF_…), PEM-encoded private keys
+   - API keys, tokens, secrets, passwords (patterns: sk-ant-[suffix], AKIA[suffix], ghp_[suffix], gho_[suffix], CF_[suffix], BEGIN PRIVATE KEY)
    - Hardcoded IPs or credentials that belong in .env
    - World-writable file permissions (check with `ls -la`)
    - Shell scripts without `set -e` or `set -eo pipefail`
