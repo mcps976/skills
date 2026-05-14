@@ -10,7 +10,7 @@ Bespoke cake and sweet treat business run by **Ruth Moloney** and **Martin Swind
 
 - **ABN:** 90 668 574 203
 - **Location:** Perth WA — delivery across metro, Hills, Swan Valley, South West WA
-- **Repo:** `git@github.com:mcps976/business-website-cms.git` (`~/Git/business-website-cms/`)
+- **Repo:** `git@github.com:mcps976/business-website-cms.git` (`~/Git/business/business-website-cms/`)
 
 ---
 
@@ -64,7 +64,7 @@ Petit Fours & Macarons, Seasonal Tarts, Dessert & High Tea Selections. (Also on 
 
 ## Site Architecture
 
-Static HTML site, no JS framework. Source in `~/Git/business-website-cms/`, built to `_site/`.
+Static HTML site, no JS framework. Source in `~/Git/business/business-website-cms/`, built to `_site/`.
 
 ### Pages
 
@@ -132,7 +132,7 @@ public_folder: "/images/uploads"
 
 Sveltia CMS requires an OAuth proxy to authenticate against GitHub. This runs as a separate Cloudflare Worker:
 
-- **Repo:** `~/Git/sveltia-cms-auth/`
+- **Repo:** `~/Git/business/sveltia-cms-auth/`
 - **Worker name:** `sveltia-cms-auth`
 - **Live URL:** `https://sveltia-cms-auth.martin-48e.workers.dev`
 - **Entry:** `src/index.js`
@@ -205,7 +205,7 @@ These items were outstanding at time of writing — verify current status before
 
 ## Git
 
-- **Repo:** `~/Git/business-website-cms/`
+- **Repo:** `~/Git/business/business-website-cms/`
 - **Remotes:** `origin` (GitHub mcps976/business-website-cms), `truenas` (bare repo)
 - **Push:** `gpush`
 - **Conventional commits:** `feat:`, `fix:`, `content:`, `style:`, `chore:`

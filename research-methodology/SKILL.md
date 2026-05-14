@@ -8,7 +8,7 @@ user-invocable: false
 
 The research-skill-graph uses a **6-lens analytical framework** to analyse any question from fundamentally different angles. Each lens must RETHINK the question — not just add more information. The tension between lenses is where insight lives.
 
-Vault root: `~/Git/research-skill-graph/`
+Vault root: `~/Git/context/research-skill-graph/`
 
 ---
 
@@ -22,7 +22,7 @@ Vault root: `~/Git/research-skill-graph/`
 
 ## Step 1: Pick the Right Framework
 
-Read [`methodology/research-frameworks.md`](~/Git/research-skill-graph/methodology/research-frameworks.md) to select the right approach:
+Read [`methodology/research-frameworks.md`](~/Git/context/research-skill-graph/methodology/research-frameworks.md) to select the right approach:
 
 | Question Type | Primary Lens Order |
 |---|---|
@@ -41,7 +41,7 @@ Also set research depth:
 
 ## Step 2: Evaluate Sources Before Trusting Them
 
-Read [`methodology/source-evaluation.md`](~/Git/research-skill-graph/methodology/source-evaluation.md) before collecting evidence.
+Read [`methodology/source-evaluation.md`](~/Git/context/research-skill-graph/methodology/source-evaluation.md) before collecting evidence.
 
 Every source must be assigned a tier:
 - **Tier 1** — RFCs, protocol specs, official docs, on-chain data, CVEs → use for hard claims
@@ -58,27 +58,27 @@ Apply the red-flag checklist: no cited sources, vendor financial incentive, emot
 
 For each lens, read its file for the specific angle, core questions, and output format. Each lens MUST rethink the question independently — treat them as written by researchers who disagree with each other.
 
-### Technical — [`lenses/technical.md`](~/Git/research-skill-graph/lenses/technical.md)
+### Technical — [`lenses/technical.md`](~/Git/context/research-skill-graph/lenses/technical.md)
 *What do the specs, data, and measurements actually say?*
 Start with Tier 1 sources only. Quantify everything. Output: COMPONENT / SPECIFICATION / MEASURED / SOURCE / CAVEAT.
 
-### Security — [`lenses/security.md`](~/Git/research-skill-graph/lenses/security.md)
+### Security — [`lenses/security.md`](~/Git/context/research-skill-graph/lenses/security.md)
 *What's the attack surface? Who's the adversary? What breaks first?*
 Check CVEs, hardening guides, trust boundaries, privilege escalation paths. Output: ASSET / THREAT MODEL / ATTACK VECTOR / SEVERITY / MITIGATION / RESIDUAL RISK.
 
-### Economic — [`lenses/economic.md`](~/Git/research-skill-graph/lenses/economic.md)
+### Economic — [`lenses/economic.md`](~/Git/context/research-skill-graph/lenses/economic.md)
 *Follow the money. Who pays, who profits, what incentives drive behaviour?*
 Check funding sources, lock-in mechanisms, TCO, supply chain control. Output: PRODUCT / BUSINESS MODEL / INCENTIVE ALIGNMENT / TOTAL COST / LOCK-IN RISK / SUSTAINABILITY.
 
-### Historical — [`lenses/historical.md`](~/Git/research-skill-graph/lenses/historical.md)
+### Historical — [`lenses/historical.md`](~/Git/context/research-skill-graph/lenses/historical.md)
 *What patterns repeat? What's been tried before? What context is everyone forgetting?*
 Trace lineage, find post-mortems, check mailing list archives. Output: PRECEDENT / WHEN / OUTCOME / PARALLEL / KEY DIFFERENCE / LESSON.
 
-### Contrarian — [`lenses/contrarian.md`](~/Git/research-skill-graph/lenses/contrarian.md)
+### Contrarian — [`lenses/contrarian.md`](~/Git/context/research-skill-graph/lenses/contrarian.md)
 *What if the consensus is wrong? Who benefits from the current narrative?*
 Write down the consensus explicitly first, then challenge it with the strongest possible counter-argument. Output: CONSENSUS / COUNTER-ARGUMENT / EVIDENCE FOR / EVIDENCE AGAINST / WHO BENEFITS / STRENGTH (1–5).
 
-### First Principles — [`lenses/first-principles.md`](~/Git/research-skill-graph/lenses/first-principles.md)
+### First Principles — [`lenses/first-principles.md`](~/Git/context/research-skill-graph/lenses/first-principles.md)
 *Forget everything. Rebuild from fundamental truths only.*
 Define the actual problem in one sentence. List non-negotiable constraints. Output: PROBLEM / FUNDAMENTAL CONSTRAINTS / CURRENT APPROACH / FIRST PRINCIPLES APPROACH / GAP / TRADE-OFFS.
 
@@ -86,7 +86,7 @@ Define the actual problem in one sentence. List non-negotiable constraints. Outp
 
 ## Step 4: Handle Contradictions
 
-Read [`methodology/contradiction-protocol.md`](~/Git/research-skill-graph/methodology/contradiction-protocol.md) when sources or lenses disagree.
+Read [`methodology/contradiction-protocol.md`](~/Git/context/research-skill-graph/methodology/contradiction-protocol.md) when sources or lenses disagree.
 
 Protocol:
 1. Check if they're talking about the same thing (versions, configs, eras)
@@ -103,7 +103,7 @@ Common productive tensions:
 
 ## Step 5: Synthesise
 
-Read [`methodology/synthesis-rules.md`](~/Git/research-skill-graph/methodology/synthesis-rules.md) before writing conclusions.
+Read [`methodology/synthesis-rules.md`](~/Git/context/research-skill-graph/methodology/synthesis-rules.md) before writing conclusions.
 
 Process:
 1. Write one paragraph per lens: main finding + confidence level + what surprised you
