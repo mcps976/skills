@@ -13,9 +13,9 @@ Node stack on **nodebox** — Beelink Mini S, Ubuntu Server, 16GB RAM, 2TB SSD.
 
 ---
 
-## Bitcoin Core v29.3
+## Bitcoin Core v31.0.0
 
-**Service:** systemd (`bitcoind`)
+**Service:** systemd (`bitcoind.service`) — active, fully synced (949,337 blocks, mainnet, as of 2026-05-14)
 **Data dir:** `~/.bitcoin/`
 **Shutdown:** `bitcoin-cli stop` — never `bitcoind -stop`
 
@@ -36,16 +36,16 @@ asmap=/home/chef4brains/.bitcoin/asmap.dat
 datacarriersize=83
 ```
 
-**Networking model:** Tor-only. All outbound peers through Tor SOCKS5 proxy (`127.0.0.1:9050`). Inbound connections only via `.onion` hidden service. Full unpruned node (~822GB on disk as of Feb 2026).
+**Networking model:** Tor-only. All outbound peers through Tor SOCKS5 proxy (`127.0.0.1:9050`). Inbound connections only via `.onion` hidden service. Full unpruned node.
 
-**ASMap:** Peer diversity protection grouping outbound peers by Autonomous System rather than IP prefix — mitigates eclipse attacks. Map file: `~/.bitcoin/asmap.dat` (1.5MB, from `bitcoin-core/asmap-data` on GitHub). Update manually: download new `.dat`, replace, restart bitcoind. **On v31+** simplify to `asmap=1` (embedded map). **Do NOT use `asmap=1` on v29** — no embedded map in this version.
+**ASMap:** Peer diversity protection grouping outbound peers by Autonomous System rather than IP prefix — mitigates eclipse attacks. Currently using file-based `asmap.dat`. **On v31, `asmap=1` is now available** (embedded map — no external file needed). Simplify config to `asmap=1` and remove the `.dat` file on next maintenance window.
 
 **Known open items:**
-- `dbcache=1500` — discussed, not yet added (would improve IBD performance)
+- `asmap=1` — switch from file-based `asmap.dat` to embedded map (now supported on v31)
+- `dbcache=1500` — discussed, not yet added (improves performance; safe to add)
 - `rpcallowip=192.0.0.0/8` — technically wrong (should be `192.168.0.0/16`), functionally harmless on isolated BTC VLAN
-- Switch to `asmap=1` when upgrading to v31+
 
-**Upgrade workflow (established pattern — 29.1 → 29.3):**
+**Upgrade workflow (established pattern — for future upgrades):**
 1. `wget` tarball + `SHA256SUMS` + `SHA256SUMS.asc`
 2. `sha256sum --ignore-missing --check SHA256SUMS`
 3. GPG verify against `fanquake.gpg` (from `bitcoin-core/guix.sigs`)
@@ -111,16 +111,16 @@ No TLS on Electrs — connection from Sparrow travels over internal LAN via fire
 ## Wallet Stack (Sparrow → Electrs → Bitcoin Core)
 
 ```
-Sparrow Wallet (Debian, 10.54.10.22)
+Sparrow Wallet (beelink — NixOS 25.11, 10.54.10.22)
     ↓ TCP port 50001
 Electrs (nodebox, 10.54.30.100)
     ↓ RPC auth
-Bitcoin Core v29.3 (nodebox)
+Bitcoin Core v31.0.0 (nodebox)
     ↓ P2P network
 Bitcoin network (Tor + clearnet via proxy)
 ```
 
-Sparrow runs on the Debian workstation, connected to own Electrs. No third-party servers involved in any balance check, address lookup, or transaction broadcast.
+Sparrow runs on the beelink (NixOS), connected to own Electrs. No third-party servers involved in any balance check, address lookup, or transaction broadcast.
 
 **UTXO hygiene:** Fresh addresses for every payment. Never reuse. Previously-spent addresses have the public key on-chain — higher quantum risk.
 
@@ -148,7 +148,7 @@ Two units on BTC VLAN, running Braiins OS+ (BOSminer 0.9.0):
 
 **Pool:** Braiins Pool (`stratum+tcp://stratum.braiins.com:3333`). User format: `plebminer21.miner-s9i` / `plebminer21.miner-s9`.
 
-**publicpool (solo mining):** Self-hosted on nodebox via Docker (`sethforprivacy/public-pool`). Stratum port 3333, UI at `http://10.54.30.100:8081`. Config: `~/pool/pool.env`. **Payout address not yet configured** — needs Sparrow wallet address.
+**publicpool (solo mining):** Self-hosted on nodebox via Docker (`sethforprivacy/public-pool`). Stratum port 3333, UI at `publicpool.internal` (HAProxy) or directly `http://10.54.30.100:8081`. Config: `~/pool/pool.env`.
 
 **Key Braiins OS+ gotchas:**
 - **Dead temp sensors + autotuning:** Autotuner requires temp feedback to progress past Stage 0. Dead sensors → stuck at 476 MHz. Fix: `[temp_control] mode = 'disabled'` in bosminer.toml (Chain 8 tuned to ~684 MHz this way).
@@ -179,7 +179,7 @@ Covers: rotate debug.log (>7 days), Docker builder cache prune, Docker dangling 
 
 ## Active Protocol Debates (relevant to this node)
 
-- **OP_RETURN / Bitcoin Core 30:** Relay policy change lifted 80-byte limit to ~4MB. Debate: sound money infrastructure vs neutral network. Node currently runs Bitcoin Core v29.3, predating this change.
+- **OP_RETURN / Bitcoin Core 30:** Relay policy change lifted 80-byte limit to ~4MB. Debate: sound money infrastructure vs neutral network. Node now runs **v31.0.0** — this relay policy is active on this node.
 - **BIP-110:** Soft fork proposal to reinstate strict data limits. First signalling block mined by Ocean (March 2026). Consensus-level change — different in kind from relay policy.
 - **BIP-360/361 (Post-quantum):** New P2MR output type with `bc1z` addresses, ML-DSA/SLH-DSA/XMSS signatures. Working implementation on testnet v0.3.0 (March 2026). Qubit threshold revised down to <500,000 (from 9M in 2023). Wallet UTXO triage above is directly relevant.
 - **Stratum V2:** Miners constructing own block templates — relevant to publicpool long-term.
